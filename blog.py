@@ -10,4 +10,4 @@ from config import Config
 
 if __name__ == '__main__':
     app.config.from_object('config')  #加载额外的配置文件
-    app.run(port=5003)
+    app.run(host='127.0.0.1',port=5003)
