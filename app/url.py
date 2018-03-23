@@ -4,4 +4,4 @@
 from app.views import *
 from app import app
 app.add_url_rule('/blog/<int:page>',view_func=BlogView.as_view('blog_get'))
-app.add_url_rule('/detail/<int:id>',view_func=BlogView.as_view('blog_detail'))
+app.add_url_rule('/detail/<int:blog_id>',view_func=BlogDetailView.as_view('blog_detail'))

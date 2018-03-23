@@ -7,7 +7,7 @@
   <article class="post post-1">
       <header class="entry-header">
           <h1 class="entry-title">
-              <a href="{{ url_for('blog_detail', id = blog.blog_id) }}">{{blog.title}}</a>
+              <a href="{{ url_for('blog_detail', blog_id=blog.blog_id) }}">{{blog.title}}</a>
           </h1>
           <div class="entry-meta">
               <span class="post-category"><a href="#">{{blog.cate_name}}</a></span>
@@ -21,7 +21,7 @@
       <div class="entry-content clearfix">
           <p>{{blog.desc}}...</p>
           <div class="read-more cl-effect-14">
-              <a href="{{ url_for('blog_detail', id = blog.blog_id) }}" class="more-link">继续阅读 <span class="meta-nav">→</span></a>
+              <a href="{{ url_for('blog_detail', blog_id=blog.blog_id) }}" class="more-link">继续阅读 <span class="meta-nav">→</span></a>
           </div>
       </div>
   </article>

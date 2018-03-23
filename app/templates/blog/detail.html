@@ -1,0 +1,61 @@
+{% extends '__base__.html' %}
+
+{% block content %}
+<article class="post post-1">
+    <header class="entry-header">
+        <h1 class="entry-title">{{blog.title}}</h1>
+        <div class="entry-meta">
+            <span class="post-category"><a href="#">{{blog.cate_name}}</a></span>
+            <span class="post-date"><a href="#"><time class="entry-date"
+                                                      datetime="{{blog.create_at}}">{{blog.create_at}}</time></a></span>
+            <span class="post-author"><a href="#">追梦人物</a></span>
+            <span class="comments-link"><a href="#">{{blog.comment_num}} 评论</a></span>
+            <span class="views-count"><a href="#">{{blog.read_num}} 阅读</a></span>
+        </div>
+    </header>
+    <div class="entry-content clearfix">
+        {{blog.content}}
+    </div>
+</article>
+<section class="comment-area" id="comment-area">
+    <hr>
+    <h3>发表评论</h3>
+    <form action="#" method="post" class="comment-form">
+        <div class="row">
+            <div class="col-md-4">
+                <label for="id_name">名字：</label>
+                <input type="text" id="id_name" name="name" required>
+            </div>
+            <div class="col-md-4">
+                <label for="id_email">邮箱：</label>
+                <input type="email" id="id_email" name="email" required>
+            </div>
+            <div class="col-md-4">
+                <label for="id_url">网址：</label>
+                <input type="text" id="id_url" name="url">
+            </div>
+            <div class="col-md-12">
+                <label for="id_comment">评论：</label>
+                <textarea name="comment" id="id_comment" required></textarea>
+                <button type="submit" class="comment-btn">发表</button>
+            </div>
+        </div>    <!-- row -->
+    </form>
+    <div class="comment-list-panel">
+        <h3>评论列表，共 <span>4</span> 条评论</h3>
+        <ul class="comment-list list-unstyled">
+          {% if comments %}
+            {% for comment in comments %}
+            <li class="comment-item">
+                <span class="nickname">{{comment.name}}</span>
+                <time class="submit-date" datetime="{{comment.create_at}}">{{comment.create_at}}</time>
+                <div class="text">
+                    {{comment.com_content}}
+                </div>
+            </li>
+            {% endfor %}
+         {% endif %}
+        </ul>
+    </div>
+</section>
+{% endblock %}

@@ -38,3 +38,14 @@ class Tags(db.Model):  #标签表
     tag_id = db.Column(db.Integer(), primary_key=True, autoincrement=True)  #标签ID
     tag_name = db.Column(db.String(255))#标签名称
     status = db.Column(db.Integer())#是否显示
+
+
+class Comment(db.Model):  #标签表
+    __tablename__='comment'
+    comment_id = db.Column(db.Integer(), primary_key=True, autoincrement=True)
+    blog_id = db.Column(db.Integer())
+    name = db.Column(db.String(255))
+    email = db.Column(db.String(255))
+    website = db.Column(db.String(255))
+    com_content = db.Column(db.String(255))
+    create_at = db.Column(db.String(255))

@@ -22,8 +22,15 @@ class BlogView(MethodView):
         cates = db.session.query(Category).all()
         return render_template('blog/index.html', blogs=blogs,pagination=pagination, tags=tags, top3=top3, cates=cates)
 
-    def detail(self, id):
-        blog_id=request.args.get('blog_id',0,type=int)
-        blog = db.session.query(Blog).filter(Blog.blog_id==id).one()
-        print(blog)
-        return render_template('blog/detail.html', blog=blog)
+class BlogDetailView(MethodView):
+    def get(self, blog_id):
+        #blog_id=request.args.get('blog_id',0,type=int)
+        #blog = db.session.query(Blog).filter(Blog.blog_id==blog_id).first()
+        blog = (db.session.query(Blog.blog_id,Blog.content,Blog.tags,Blog.title,Blog.desc,Blog.cate_id,Blog.comment_num,Blog.read_num,Blog.create_at,Category.cate_id, Category.cate_name)).select_from(Blog, Category).filter(Blog.cate_id==Category.cate_id, Blog.blog_id==blog_id).order_by(Blog.create_at.desc()).first()
+        comments = db.session.query(Comment).filter(blog_id==blog_id).all()
+
+        pagination = (db.session.query(Blog.blog_id,Blog.content,Blog.tags,Blog.title,Blog.desc,Blog.cate_id,Blog.comment_num,Blog.read_num,Blog.create_at,Category.cate_id, Category.cate_name)).select_from(Blog, Category).filter(Blog.cate_id==Category.cate_id).order_by(Blog.create_at.desc()).all()
+        top3 = pagination[:3]
+        tags = db.session.query(Tags).filter(Tags.status=='1').all()
+        cates = db.session.query(Category).all()
+        return render_template('blog/detail.html', blog=blog, comments=comments, top3=top3, tags=tags, cates=cates)
